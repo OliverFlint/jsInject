@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jsInject.httpModule.Web", "jsInject.httpModule.Web\jsInject.httpModule.Web.csproj", "{A5CF67B6-FB3E-4C6E-B9D1-9CCDCF413FD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jsInject.httpModule", "jsInject.httpModule\jsInject.httpModule.csproj", "{EB768683-6400-4C3D-8D0A-55899B3E272F}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5CF67B6-FB3E-4C6E-B9D1-9CCDCF413FD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5CF67B6-FB3E-4C6E-B9D1-9CCDCF413FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5CF67B6-FB3E-4C6E-B9D1-9CCDCF413FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5CF67B6-FB3E-4C6E-B9D1-9CCDCF413FD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB768683-6400-4C3D-8D0A-55899B3E272F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB768683-6400-4C3D-8D0A-55899B3E272F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB768683-6400-4C3D-8D0A-55899B3E272F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB768683-6400-4C3D-8D0A-55899B3E272F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

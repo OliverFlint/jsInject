@@ -1,0 +1,1 @@
+﻿alert("folder1/page1.aspx.js injected!");
