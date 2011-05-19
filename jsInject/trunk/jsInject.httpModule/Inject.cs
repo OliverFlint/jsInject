@@ -26,8 +26,7 @@ namespace jsInject.httpModule
 
         public void OnEndRequest(object sender, System.EventArgs args)
         {
-            HttpApplication context = (HttpApplication)sender;
-            _context = context;
+            _context = (HttpApplication)sender;
             _jsInjectRoot = (string)ConfigurationSettings.AppSettings["jsInjectRoot"];
             injectFileExtensionRule();
             injectFileNameRule();
@@ -36,8 +35,8 @@ namespace jsInject.httpModule
 
         private void injectFileExtensionRule()
         {
-            string fileExtension = VirtualPathUtility.GetExtension(_context.Request.FilePath);
-            string _jsFilename = _jsInjectRoot + "Extensions/" + fileExtension + ".js";
+            string _fileExtension = VirtualPathUtility.GetExtension(_context.Request.FilePath);
+            string _jsFilename = string.Format("{0}Extensions/{1}.js", _jsInjectRoot, _fileExtension);
             if(File.Exists(_context.Request.MapPath(_jsFilename)))
             {
                 _context.Response.Write("<script language='javascript' src='" + _jsFilename + "' ></script>");
@@ -46,8 +45,8 @@ namespace jsInject.httpModule
 
         private void injectFileNameRule()
         {
-            string fileName = VirtualPathUtility.GetFileName(_context.Request.Path);
-            string _jsFilename = _jsInjectRoot + "FileNames/" + fileName + ".js";
+            string _fileName = VirtualPathUtility.GetFileName(_context.Request.Path);
+            string _jsFilename = string.Format("{0}FileNames/{1}.js",_jsInjectRoot,_fileName);
             if (File.Exists(_context.Request.MapPath(_jsFilename)))
             {
                 _context.Response.Write("<script language='javascript' src='" + _jsFilename + "' ></script>");
@@ -56,9 +55,8 @@ namespace jsInject.httpModule
 
         private void injectPathRule()
         {
-            string path = _context.Request.Path;
-            string _jsFilename = _jsInjectRoot + "Paths" + path + ".js";
-            //_context.Response.Write(_jsFilename);
+            string _path = _context.Request.Path;
+            string _jsFilename = string.Format("{0}Paths{1}.js",_jsInjectRoot,_path);
             if (File.Exists(_context.Request.MapPath(_jsFilename)))
             {
                 _context.Response.Write("<script language='javascript' src='" + _jsFilename + "' ></script>");
