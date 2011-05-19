@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Configuration;
 using System.IO;
+using System.Web.UI.HtmlControls;
 
 namespace jsInject.httpModule
 {
@@ -21,12 +22,21 @@ namespace jsInject.httpModule
 
         public void Init(HttpApplication context)
         {
-            context.EndRequest += new EventHandler(OnEndRequest);
+            context.PostMapRequestHandler += new EventHandler(OnPostMapRequestHandler);
         }
 
-        public void OnEndRequest(object sender, System.EventArgs args)
+        void OnPostMapRequestHandler(object sender, EventArgs e)
         {
             _context = (HttpApplication)sender;
+            Page page = HttpContext.Current.CurrentHandler as Page;
+            if (page != null)
+            {
+                page.PreRenderComplete += new EventHandler(OnPreRenderComplete);
+            }
+        }
+
+        public void OnPreRenderComplete(object sender, System.EventArgs args)
+        {
             _jsInjectRoot = (string)ConfigurationManager.AppSettings["jsInjectRoot"];
             injectFileExtensionRule();
             injectFileNameRule();
@@ -39,7 +49,7 @@ namespace jsInject.httpModule
             string _jsFilename = string.Format("{0}Extensions/{1}.js", _jsInjectRoot, _fileExtension);
             if(File.Exists(_context.Request.MapPath(_jsFilename)))
             {
-                _context.Response.Write("<script language='javascript' src='" + _jsFilename + "' ></script>");
+                injectIntoHead(_jsFilename);
             }
         }
 
@@ -49,7 +59,7 @@ namespace jsInject.httpModule
             string _jsFilename = string.Format("{0}FileNames/{1}.js",_jsInjectRoot,_fileName);
             if (File.Exists(_context.Request.MapPath(_jsFilename)))
             {
-                _context.Response.Write("<script language='javascript' src='" + _jsFilename + "' ></script>");
+                injectIntoHead(_jsFilename);
             }
         }
 
@@ -59,7 +69,26 @@ namespace jsInject.httpModule
             string _jsFilename = string.Format("{0}Paths{1}.js",_jsInjectRoot,_path);
             if (File.Exists(_context.Request.MapPath(_jsFilename)))
             {
-                _context.Response.Write("<script language='javascript' src='" + _jsFilename + "' ></script>");
+                injectIntoHead(_jsFilename);
+            }
+        }
+
+        private void injectIntoHead(string jsFileName)
+        {
+            Page page = HttpContext.Current.CurrentHandler as Page;
+            if (page != null)
+            {
+                if (page.Header != null)
+                {
+                    HtmlGenericControl Include = new HtmlGenericControl("script");
+                    Include.Attributes.Add("type", "text/javascript");
+                    Include.Attributes.Add("src", jsFileName);
+                    page.Header.Controls.Add(Include);
+                }
+                else if (!page.ClientScript.IsClientScriptIncludeRegistered(page.GetType(), jsFileName))
+                {
+                    page.ClientScript.RegisterClientScriptInclude(page.GetType(), jsFileName, jsFileName);
+                }
             }
         }
     }
