@@ -15,7 +15,8 @@ namespace jsInject.httpModule
 
         public void Dispose()
         {
-            //Dispose stuff here...
+            _jsInjectRoot = null;
+            _context.Dispose();
         }
 
         public void Init(HttpApplication context)
