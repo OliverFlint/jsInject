@@ -27,7 +27,7 @@ namespace jsInject.httpModule
         public void OnEndRequest(object sender, System.EventArgs args)
         {
             _context = (HttpApplication)sender;
-            _jsInjectRoot = (string)ConfigurationSettings.AppSettings["jsInjectRoot"];
+            _jsInjectRoot = (string)ConfigurationManager.AppSettings["jsInjectRoot"];
             injectFileExtensionRule();
             injectFileNameRule();
             injectPathRule();
