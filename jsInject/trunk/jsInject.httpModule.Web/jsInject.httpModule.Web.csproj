@@ -50,7 +50,9 @@
     <Content Include="js\jsInject\FileNames\page2.aspx.js" />
     <Content Include="js\jsInject\Paths\folder1\page1.aspx.js" />
     <Content Include="page2.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -98,8 +100,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>51919</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:51919/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
