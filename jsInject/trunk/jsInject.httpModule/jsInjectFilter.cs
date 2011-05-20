@@ -26,7 +26,7 @@ namespace jsInject.httpModule
             this.Base = ResponseStream;
             if (!string.IsNullOrEmpty(stringToInject))
             {
-                this._stringToInject = stringToInject.ToLower();
+                this._stringToInject = stringToInject;
             }
         }
 
@@ -39,11 +39,11 @@ namespace jsInject.httpModule
             this.Base = ResponseStream;
             if (!string.IsNullOrEmpty(stringToInject))
             {
-                this._stringToInject = stringToInject.ToLower();
+                this._stringToInject = stringToInject;
             }
             if (!string.IsNullOrEmpty(injectBefore))
             {
-                this._injectBefore = injectBefore.ToLower();
+                this._injectBefore = injectBefore;
             }
         }
     
@@ -63,7 +63,7 @@ namespace jsInject.httpModule
             //  Get HTML code
             string HTML = System.Text.Encoding.UTF8.GetString(buffer, offset, count);
             //  Replace the text with something else
-            HTML = HTML.ToLower().Replace(_injectBefore, string.Format("{0}{1}", this._stringToInject, _injectBefore));
+            HTML = HTML.Replace(_injectBefore, string.Format("{0}{1}", this._stringToInject, _injectBefore));
             //  Send output
             buffer = System.Text.Encoding.UTF8.GetBytes(HTML);
             this.Base.Write(buffer, 0, buffer.Length);
